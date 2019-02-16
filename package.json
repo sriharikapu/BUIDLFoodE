@@ -22,6 +22,7 @@
   "homepage": "https://github.com/truffle-box/drizzle-box#readme",
   "dependencies": {
     "@portis/web3": "^2.0.0-beta.11",
+    "@wyre/api": "^1.0.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "openzeppelin-solidity": "^2.1.1",

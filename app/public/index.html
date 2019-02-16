@@ -30,6 +30,24 @@
       <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
       <script src="https://verify.sendwyre.com/js/pm-widget-init.js"></script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="text/javascript">
+      var handler = new WyrePmWidget({
+        env: "test",
+        onLoad: function(){
+        },
+        onSuccess: function(result){
+          // Here you would forward the publicToken back to your server in order to  be shipped to the Wyre API
+          console.log(result.publicToken);
+        },
+        onExit: function(err){
+          if (err != null) {
+            // The user encountered an error prior to exiting the module
+          }
+          console.log("Exited:", err);
+        }
+      });
+    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
