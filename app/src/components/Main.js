@@ -16,6 +16,27 @@ import Web3 from 'web3';
 
 const portis = new Portis("8979ee0a-562d-413e-b83f-915f682cfa1b", "rinkeby", { scope: ["email"]  });  
 const web3 = new Web3(portis.provider);
+
+var handler = new window.WyrePmWidget({
+  env: "test",
+  onLoad: function(){
+  },
+  onSuccess: function(result){
+    // Here you would forward the publicToken back to your server in order to  be shipped to the Wyre API
+    console.log(result.publicToken);
+  },
+  onExit: function(err){
+    if (err != null) {
+      // The user encountered an error prior to exiting the module
+    }
+    console.log("Exited:", err);
+  }
+});
+
+portis.onLogin((walletAddress, email) => {
+  handler.open();
+});
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
