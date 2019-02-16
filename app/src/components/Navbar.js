@@ -31,7 +31,7 @@ function Navbar(props) {
             {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            News
+            FOODE
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

@@ -15,7 +15,6 @@ import IconButton from '@material-ui/core/IconButton';
 //import MenuIcon from '@material-ui/icons/Menu';
 
 //Other app components
-import Payment from "./components/Payment";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import logo from "./logo.png";
@@ -26,7 +25,6 @@ export default ({ accounts }) => (
     
       <Navbar></Navbar>
       <Main></Main>
-      <Payment></Payment>
     <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Examples</h1>
