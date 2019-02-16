@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 //import MenuIcon from '@material-ui/icons/Menu';
-
+import logoA from '../commons/imgs/foode_1.png';
 const styles = {
   root: {
     flexGrow: 1,
@@ -19,6 +19,10 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  logoSize: {
+    height: '50px',
+    width: '50px',
+  }
 };
 
 function Navbar(props) {
@@ -29,6 +33,7 @@ function Navbar(props) {
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             {/* <MenuIcon /> */}
+          <img className = {classes.logoSize} src={logoA}/> 
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             FOODE

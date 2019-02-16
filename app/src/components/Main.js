@@ -12,11 +12,7 @@ import ShapeshiftImg from '../commons/imgs/shapeshift.png';
 //blockchain imports
 import Portis from '@portis/web3';
 import Web3 from 'web3';
- 
-//KeepKey imports
-//import { KeepKeyManager, KeepKey, WebUSBDevice, Messages, Types, messageTypeRegistry } from '@keepkey/keepkey.js';
-//import KeepKey from '@keepkey/keepkey.js/dist/lib/keepkey'
-//import WebUSBDevice from '@keepkey/keepkey.js/dist/lib/webUSBDevice'
+
 
 const portis = new Portis("8979ee0a-562d-413e-b83f-915f682cfa1b", "rinkeby", { scope: ["email"]  });  
 const web3 = new Web3(portis.provider);
@@ -123,23 +119,7 @@ function openPortis(title){
   } else {
 
     console.log('KeepKey payment was selected');
-    //sniped of code trying towork with keepkey
-    // await WebUSBDevice.requestPair() // Prompt the user to pair a KeepKey
-    // const keepkeyManager = new KeepKeyManager({
-    //   onConnectCallback: (deviceID) => console.log('device was connected!'), // These callbacks only work with webUSB at the moment
-    //   onDisconnectCallback: (deviceID) => console.log('device was disconnected!') 
-    // })
-    // await keepkeyManager.initializeWebUSBDevices()
-    // // Ping all connected devices with a TEST message
-    // const pingsByDeviceID = keepkeyManager.exec('ping', { message: 'TEST' })
-    // // { "YOUR-DEVICE-ID": "TEST" }
-
-    // // Get the KeepKey for the first deviceID in the manager
-    // const keepkey = manager.get()
-    // // all public keepkey methods return promises
-    // const { message } = await keepkey.ping({ message: 'TEST' }) 
-    // keepkey.ping({ message: 'TEST' }).then(response => console.log(response.message))
-    };
+    }
   
 };
 
