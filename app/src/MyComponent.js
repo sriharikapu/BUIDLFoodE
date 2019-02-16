@@ -5,10 +5,28 @@ import {
   ContractForm,
 } from "drizzle-react-components";
 
+//Material UI components
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+//import MenuIcon from '@material-ui/icons/Menu';
+
+//Other app components
+import Payment from "./components/Payment";
+import Main from "./components/Main";
+import Navbar from "./components/Navbar";
 import logo from "./logo.png";
 
+//Main App
 export default ({ accounts }) => (
   <div className="App">
+    
+      <Navbar></Navbar>
+      <Main></Main>
+      <Payment></Payment>
     <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Examples</h1>
@@ -26,6 +44,10 @@ export default ({ accounts }) => (
         This shows a simple ContractData component with no arguments, along with
         a form to set its value.
       </p>
+      
+      <Button variant="contained" color="primary">
+      Hello World
+      </Button>
       <p>
         <strong>Stored Value: </strong>
         <ContractData contract="SimpleStorage" method="storedData" />
