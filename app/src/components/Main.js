@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 //image imports
 import PortisImg from '../commons/imgs/portis.png';
 import ShapeshiftImg from '../commons/imgs/shapeshift.png';
+import WyreImg from '../commons/imgs/wyre.png';
 
 //blockchain imports
 import Portis from '@portis/web3';
@@ -17,8 +18,39 @@ import Web3 from 'web3';
 const portis = new Portis("8979ee0a-562d-413e-b83f-915f682cfa1b", "rinkeby", { scope: ["email"]  });  
 const web3 = new Web3(portis.provider);
 
+var isWyre = false;
 portis.onLogin((walletAddress, email) => {
-  window.handler.open();
+  console.log(walletAddress, email);
+  // generate a device token if it hasn't been already
+  // var deviceToken = localStorage.getItem("DEVICE_TOKEN");
+  // if(!deviceToken) {
+  //   var array = new Uint8Array(25);
+  //   window.crypto.getRandomValues(array);
+  //   deviceToken = Array.prototype.map.call(array, x => ("00" + x.toString(16)).slice(-2)).join('');
+  //   localStorage.setItem("DEVICE_TOKEN", deviceToken);
+  // }
+  if(isWyre) {
+    var array = new Uint8Array(25);
+    window.crypto.getRandomValues(array);
+    var deviceToken = Array.prototype.map.call(array, x => ("00" + x.toString(16)).slice(-2)).join('');
+    localStorage.setItem("DEVICE_TOKEN", deviceToken);
+
+    // configure the widget to authenticate using the generated key
+    var widget = new window.Wyre.Widget({
+      env: "test",
+      accountId: "AC_EW2EMUAL3XR",
+      auth: { 
+        type: "secretKey",
+        secretKey: deviceToken
+      },
+      operation: {
+        type: "onramp",
+        destCurrency: "ETH",
+        dest: "ethereum:" + walletAddress
+      }
+    });
+  }
+  widget.open();
 });
 
 const styles = theme => ({
@@ -100,23 +132,32 @@ const styles = theme => ({
 const images = [
   {
     url: PortisImg,
-    title: 'Portis',
+    title: 'Debit card',
+    width: '25%',
+  },
+  {
+    url: WyreImg,
+    title: 'ACH bank transfer',
     width: '25%',
   },
   {
     url: ShapeshiftImg,
     title: 'Shapeshift',
-    width: '25%',
-  },
+    width: '25%'
+  }
 ];
 
-function openPortis(title){
-  if (title === 'Portis'){
-
+function openPayment(title){
+  if (title === 'Debit card'){
     console.log('Portis payment was selected');
+    isWyre = false;
     portis.showPortis();
   
+  } else if(title === 'ACH bank transfer') { 
+    isWyre = true;
+    portis.showPortis();
   } else {
+    isWyre = false;
 
     console.log('KeepKey payment was selected');
     }
@@ -140,7 +181,7 @@ function Main(props) {
               style={{
                 width: image.width,
               }}
-              onClick={(e) => openPortis(image.title)}
+              onClick={(e) => openPayment(image.title)}
             >
               <span
                 className={classes.imageSrc}
