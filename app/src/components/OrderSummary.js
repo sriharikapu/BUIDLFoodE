@@ -24,7 +24,6 @@ const styles = theme => ({
   },
   img: {
     margin: 'auto',
-
     maxWidth: '120%',
     maxHeight: '120%',
   },
@@ -39,6 +38,7 @@ function ComplexGrid(props) {
           <Grid item>
             <ButtonBase className={classes.image}>
               <img className={classes.img} 
+
               alt="Marcus Zest" 
               src={FarmerImg} />
             </ButtonBase>
@@ -51,7 +51,8 @@ function ComplexGrid(props) {
               </Grid>
             </Grid>
             <Grid item container direction="column">
-              <Typography variant="subtitle1">ETH 0.06</Typography>
+              <Typography variant="h5"></Typography>
+              <Typography variant="h5">ETH 0.06</Typography>
             </Grid>
           </Grid>
         </Grid>

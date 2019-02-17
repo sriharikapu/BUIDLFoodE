@@ -28,7 +28,7 @@ const styles = {
 function Navbar(props) {
   const { classes } = props;
   const style = {
-    background: '#d6e681'
+    background: '#696869'
   };
   return (
     <div className={classes.root}>
