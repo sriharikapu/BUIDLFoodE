@@ -54,8 +54,9 @@ function ShowBalance() {
       "Account balance: 0 ETH (Please select your payment method)";
     return;
   }
-  web3.eth.getBalance(add, 'latest').then((result) => {
+  web3.eth.getBalance(add, 'pending').then((result) => {
   var resultInWei = parseFloat(web3.utils.fromWei(result, 'ether'));
+  
   ab.innerHTML =
     "Account balance: " +
     resultInWei.toFixed(4) + " ETH";});
@@ -77,8 +78,8 @@ function ShowTransaction(receipt) {
       console.error(error);
     }
     else {
-
-      console.log(output);
+      // TODO: this should not be hardcoded
+      ts.innerHTML = "Success! You just paid Marcus (at: " + localStorage.getItem(CT_FARMER_ADDRESS) + " , receipt: " + receipt + ").";
     }
   });
 }
