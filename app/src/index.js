@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+//import * as serviceWorker from './serviceWorker';
 //import Portis from '@portis/web3';
 //import Web3 from 'web3';
 
@@ -12,4 +12,4 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 
-serviceWorker.unregister();
+//serviceWorker.unregister();

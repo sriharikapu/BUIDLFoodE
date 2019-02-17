@@ -1,9 +1,9 @@
 import React from "react";
-import {
-  AccountData,
-  ContractData,
-  ContractForm,
-} from "drizzle-react-components";
+// import {
+//   AccountData,
+//   ContractData,
+//   ContractForm,
+// } from "drizzle-react-components";
 
 //Material UI components
 import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
