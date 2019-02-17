@@ -25,16 +25,17 @@ export default ({ accounts }) => (
     
       <Navbar></Navbar>
       <Main></Main>
-    <div>
+
+    {/* <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Examples</h1>
       <p>Examples of how to get started with Drizzle in various situations.</p>
-    </div>
-
-    <div className="section">
-      <h2>Active Account</h2>
+    </div> */}
+{/* 
+      <div className="section">
+      <h2>Account data</h2>
       <AccountData accountIndex="0" units="ether" precision="3" />
-    </div>
+      </div>
 
     <div className="section">
       <h2>SimpleStorage</h2>
@@ -102,6 +103,6 @@ export default ({ accounts }) => (
       </p>
       <strong>Single Device Data: </strong>
       <ContractData contract="ComplexStorage" method="singleDD" />
-    </div>
+    </div> */}
   </div>
 );

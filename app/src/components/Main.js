@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 //image imports
 import PortisImg from '../commons/imgs/portis.png';
 import ShapeshiftImg from '../commons/imgs/shapeshift.png';
@@ -14,9 +15,116 @@ import WyreImg from '../commons/imgs/wyre.png';
 import Portis from '@portis/web3';
 import Web3 from 'web3';
 
-
+// Definitions and initializations
 const portis = new Portis("8979ee0a-562d-413e-b83f-915f682cfa1b", "rinkeby", { scope: ["email"]  });  
 const web3 = new Web3(portis.provider);
+const CT_USER_ADDRESS = "USER_ADDRESS";
+const CT_FARMER_ADDRESS = "FARMER_ADDRESS";
+const CT_PORTIS_IMG_TITLE = "Debit card or ETH";
+const CT_WYRE_IMG_TITLE = "ACH bank transfer";
+
+localStorage.setItem(CT_USER_ADDRESS, null);
+localStorage.setItem(CT_FARMER_ADDRESS, "0x46e4d671d7d149fe8d4ea434e69b186327efa21a");
+
+// Functions
+function ShowBalance() {
+
+  let ab = document.getElementById("account-balance");
+  if(ab === null) {
+    return;
+  }
+
+  ab.innerHTML = "Account balance: 0 ETH";
+
+  if(web3 === null) {
+    return;
+  }
+  let add = localStorage.getItem(CT_USER_ADDRESS);
+  if(add === "null") {
+    ab.innerHTML =
+      "Account balance: 0 ETH (Please select your payment method)";
+    return;
+  }
+  web3.eth.getBalance(add, 'latest').then((result) => {
+  ab.innerHTML =
+    "Account balance: " +
+    web3.utils.fromWei(result, 'ether') + " ETH";});
+
+    ab.style.color = "black";
+
+}
+ShowBalance();
+
+function ShowTransaction(receipt) {
+  let ts = document.getElementById("transaction-status");
+  if(ts === null) {
+    return;
+  }
+
+  ts.innerHTML = "This is your receipt: " + receipt;
+  web3.eth.getTransaction(receipt, (error, output) => {
+    if (error) {
+      console.error(error);
+    }
+    else {
+      if(output.blockHash === null) {
+        ts.innerHTML = ts.innerHTML + "The transaction is pending.";
+      }
+      console.log(output);
+    }
+  });
+}
+
+function SendPayment() {
+  if(web3 == null) {
+    return;
+  }
+
+  if(localStorage.getItem(CT_USER_ADDRESS) === "null") {
+    let ab = document.getElementById("account-balance");
+    if(ab === null) {
+      return;
+    }
+    else {
+      ab.style.color = "red";
+    } 
+    return;
+  }
+
+  if(localStorage.getItem(CT_FARMER_ADDRESS) === "null") {
+    return;
+  }
+
+  var handleReceipt = (error, receipt) => {
+    if (error) {
+      console.error(error);
+    }
+    else {
+      ShowBalance();
+      ShowTransaction(receipt);
+    }
+  }
+
+  web3.eth.sendTransaction({
+    from: localStorage.getItem(CT_USER_ADDRESS),
+    to: localStorage.getItem(CT_FARMER_ADDRESS),
+    value: 10000
+}, handleReceipt);
+}
+
+function openPaymentOptions(title){
+  if (title === CT_PORTIS_IMG_TITLE){
+    isWyre = false;
+    portis.showPortis();
+  
+  } else if(title === CT_WYRE_IMG_TITLE) { 
+    isWyre = true;
+    portis.showPortis();
+  } else {
+    isWyre = false;
+  }
+  
+};
 
 var isWyre = false;
 portis.onLogin((walletAddress, email) => {
@@ -29,6 +137,7 @@ portis.onLogin((walletAddress, email) => {
   //   deviceToken = Array.prototype.map.call(array, x => ("00" + x.toString(16)).slice(-2)).join('');
   //   localStorage.setItem("DEVICE_TOKEN", deviceToken);
   // }
+  
   if(isWyre) {
     var array = new Uint8Array(25);
     window.crypto.getRandomValues(array);
@@ -49,8 +158,11 @@ portis.onLogin((walletAddress, email) => {
         dest: "ethereum:" + walletAddress
       }
     });
+    widget.open();
   }
-  widget.open();
+
+  localStorage.setItem(CT_USER_ADDRESS, walletAddress);
+  ShowBalance();
 });
 
 const styles = theme => ({
@@ -132,12 +244,12 @@ const styles = theme => ({
 const images = [
   {
     url: PortisImg,
-    title: 'Debit card',
+    title: CT_PORTIS_IMG_TITLE,
     width: '25%',
   },
   {
     url: WyreImg,
-    title: 'ACH bank transfer',
+    title: CT_WYRE_IMG_TITLE,
     width: '25%',
   },
   {
@@ -147,83 +259,74 @@ const images = [
   }
 ];
 
-function openPayment(title){
-  if (title === 'Debit card'){
-    console.log('Portis payment was selected');
-    isWyre = false;
-    portis.showPortis();
-  
-  } else if(title === 'ACH bank transfer') { 
-    isWyre = true;
-    portis.showPortis();
-  } else {
-    isWyre = false;
-
-    console.log('KeepKey payment was selected');
-    }
-  
-};
 
 function Main(props) {
   const { classes } = props;
-
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-           {images.map(image => (
-            <ButtonBase
-              focusRipple
-              key={image.title}
-              className={classes.image}
-              focusVisibleClassName={classes.focusVisible}
-              style={{
-                width: image.width,
-              }}
-              onClick={(e) => openPayment(image.title)}
-            >
-              <span
-                className={classes.imageSrc}
-                style={{
-                  backgroundImage: `url(${image.url})`,
-                }}
-              />
-              <span className={classes.imageBackdrop} />
-              <span className={classes.imageButton}>
-                <Typography
-                  component="span"
-                  variant="subtitle1"
-                  color="inherit"
-                  className={classes.imageTitle}
+      return (
+        <div className={classes.root}>
+          <Grid container spacing={24}>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+              <p>Please select your payment method:</p>
+               {images.map(image => (
+                <ButtonBase
+                  focusRipple
+                  key={image.title}
+                  className={classes.image}
+                  focusVisibleClassName={classes.focusVisible}
+                  style={{
+                    width: image.width,
+                  }}
+                  onClick={(e) => openPaymentOptions(image.title)}
                 >
-                  {image.title}
-                  <span className={classes.imageMarked} />
-                </Typography>
-              </span>
-            </ButtonBase>
-          ))}
+                  <span
+                    className={classes.imageSrc}
+                    style={{
+                      backgroundImage: `url(${image.url})`,
+                    }}
+                  />
+                  <span className={classes.imageBackdrop} />
+                  <span className={classes.imageButton}>
+                    <Typography
+                      component="span"
+                      variant="subtitle1"
+                      color="inherit"
+                      className={classes.imageTitle}
+                    >
+                      {image.title}
+                      <span className={classes.imageMarked} />
+                    </Typography>
+                  </span>
+                </ButtonBase>
+              ))}
+    
+              {/* <Grid item xs={10}>
+                <Paper className={classes.paper} 
+                    style={{
+                      position: 'float',
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    xs=10
+                </Paper>
+              </Grid> */}
 
-          <Grid item xs={10}>
-            <Paper className={classes.paper} 
-                style={{
-                  position: 'float',
-                  left: 0,
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                xs=10
-            </Paper>
+                <p id="account-balance">Account balance: 0 ETH (Please select your payment method)</p>
+                <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={() => {SendPayment();}} >Send payment</Button>                    
+                <p id="transaction-status"></p>
+              </Paper>
+            </Grid>
           </Grid>
-          
-          </Paper>
-        </Grid>
-      </Grid>
-    </div>
+
+        </div>
   );
 }
 
