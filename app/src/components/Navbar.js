@@ -27,9 +27,12 @@ const styles = {
 
 function Navbar(props) {
   const { classes } = props;
+  const style = {
+    background: '#d6e681'
+  };
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={style}>
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             {/* <MenuIcon /> */}
