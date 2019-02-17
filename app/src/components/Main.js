@@ -14,8 +14,10 @@ import WyreImg from '../commons/imgs/wyre.png';
 //blockchain imports
 import Portis from '@portis/web3';
 import Web3 from 'web3';
-
+// ------------------------------------
 // Definitions and initializations
+// TODO: this should not be hardcoded
+// ------------------------------------
 const portis = new Portis("8979ee0a-562d-413e-b83f-915f682cfa1b", "rinkeby", { scope: ["email"]  });  
 const web3 = new Web3(portis.provider);
 const CT_USER_ADDRESS = "USER_ADDRESS";
@@ -23,10 +25,16 @@ const CT_FARMER_ADDRESS = "FARMER_ADDRESS";
 const CT_PORTIS_IMG_TITLE = "Debit card or ETH";
 const CT_WYRE_IMG_TITLE = "ACH bank transfer";
 
+// TODO: this should not be hardcoded
+// TODO: do not use localStorage
 localStorage.setItem(CT_USER_ADDRESS, null);
 localStorage.setItem(CT_FARMER_ADDRESS, "0x46e4d671d7d149fe8d4ea434e69b186327efa21a");
 
+// ------------------------------------
 // Functions
+// ------------------------------------
+// TODO: stuff should not be hardcoded
+// TODO: do not use localStorage
 function ShowBalance() {
 
   let ab = document.getElementById("account-balance");
@@ -165,6 +173,9 @@ portis.onLogin((walletAddress, email) => {
   ShowBalance();
 });
 
+// ------------------------------------
+// Good looks
+// ------------------------------------
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -259,7 +270,9 @@ const images = [
   }
 ];
 
-
+// ------------------------------------
+// Layout
+// ------------------------------------
 function Main(props) {
   const { classes } = props;
       return (
