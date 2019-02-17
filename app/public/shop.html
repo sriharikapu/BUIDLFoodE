@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css"> 
+    <!-- Fontawesome.io -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><i class="fas fa-shopping-basket"></i> <span class="highlight">Foode Dapp</span></h1>
+        </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="#">Sign Up / Login</a></li> 
+                    <!-- Need a page for Portis Login to be created and then link to SignUp/Login -->
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="http://localhost:3000/">Checkout</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="shop-body">
+
+        <div class="card">
+            <img id="apple" src="./images/apples.jpg" alt="Avatar" style="width:100%">
+            <div class="container">
+                <h4><b>Fruits</b></h4>
+                <p>Local & Organic</p>
+            </div>
+            <!-- Button -->
+        <div class='shop-btn'>
+            <form action="./shop-fruit.html">
+            <button type="button" class="btn btn-success btn-lg">Shop Fruits</button>
+            </form>
+        </div>
+
+        </div> 
+
+        <div class="card">
+            <img id="carrot" src="./images/carrot-veggies.jpg" alt="Avatar" style="width:100%">
+            <div class="container">
+                <h4><b>Vegetables</b></h4>
+                <p>Local & Organic</p>
+            </div>
+            <!-- Button -->
+        <div class='shop-btn'>
+            <form action="#">
+            <button type="submit" class="btn btn-success btn-lg">Shop Veggies</button>
+            </form>
+        </div>
+            
+        </div> 
+
+        <div class="card">
+            <img id="milk" src="./images/organic-milk.png" alt="Avatar" style="width:100%">
+                <div class="text-milk">
+                <h4><b>Cheeses, Milk & Other Dairy</b></h4>
+                <p>Local & Organic</p>
+            </div>
+
+               <!-- Button -->
+        <div class='shop-btn'>
+            <button type="button" class="btn btn-success btn-lg">Shop Dairy</button>
+            <!-- add link for button to direct to -->
+        </div>
+
+        </div> 
+
+        <div class="card">
+            <img id="steak" src="./images/rare-steak.jpeg" alt="Avatar" style="width:100%">
+            <div class="container">
+                <h4><b>Meats</b></h4>
+                <p>Local & Organic</p>
+            </div>
+
+            <!-- Button -->
+        <div class='shop-btn'>
+            <button type="button" class="btn btn-success btn-lg">Shop Meats</button>
+            <!-- add link for button to direct to -->
+        </div>
+
+        </div> 
+        
+    </div>
+<footer>
+    <P>CryptoMaven, Copyright &copy; 2019</P>
+</footer>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+</body>
+</html>
