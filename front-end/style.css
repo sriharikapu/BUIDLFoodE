@@ -11,6 +11,15 @@ body{
     background-color: #f4f4f4;
 }
 
+/* Logo */
+#logo {
+    height: 25%;
+    width: 25%;
+
+}
+
+
+/* End */
 .container {
     width: 80%;
     margin: auto;
@@ -36,7 +45,7 @@ header{
     color: #fff;
     padding-top: 30px;
     min-height: 70px;
-    border-bottom: #32a0c2 3px solid;
+    border-bottom: #d6e681 5px solid;
 }
 
 header a{
@@ -90,6 +99,7 @@ header a:hover{
     font-size: 55px;
     margin-bottom: 10px;
     font-weight: bold;
+    color: #000;
 }
 
 #showcase p{
@@ -99,7 +109,7 @@ header a:hover{
 /* Main Text About Project */
 .main-text {
    padding: 7%;
-
+    text-align: center;
 }
 
 /*Button */
@@ -111,6 +121,15 @@ header a:hover{
     padding: 5%;
 
 }
+
+/* button columns */
+.row {
+    display: flex;
+  }
+  
+  .column {
+    flex: 50%;
+  }
 
 /* NewsLetter */
 #newsletter form input[type="email"],
@@ -170,17 +189,71 @@ footer{
     text-align: center;
 }
 
+
+
 /* Shop.html CSS Styles Page */
 
+/* cards for store shop */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+  }
+  
+  /* Add rounded corners to the top left and the top right corner of the image */
+  img {
+    border-radius: 5px 5px 0 0;
+  }
+    /* card text align */
+  .card {
+      text-align: center;
+  }
+
+  .text-milk {
+    padding-top: 5%;
+  }
+
+  /* change size of apple picture */
+  #apple, #steak, #milk, #carrot {
+    max-width:50%;
+    max-height:50%;
+    padding: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+
+  #milk {
+      padding-top: 5%;
+  }
+
+  #steak {
+    padding-top: 5%;
+  }
+/* button for Shopping */
+/*Button */
+
+.shop-btn {
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+
+}
 
 /* Profile.html CSS Styles Page*/
 
+
+
 /* Checkout.html CSS Styles Page*/
+
+
 
 /* Cart.html CSS Styles Page*/
 
 
-
+/* shop-fruit.html Page */
 
 
 
