@@ -17,6 +17,7 @@ import IconButton from '@material-ui/core/IconButton';
 //Other app components
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
+import OrderSummary from "./components/OrderSummary";
 import logo from "./logo.png";
 
 //Main App
@@ -24,6 +25,11 @@ export default ({ accounts }) => (
   <div className="App">
     
       <Navbar></Navbar>
+      <div className="section">
+      </div>
+      <OrderSummary></OrderSummary>
+      <div className="section">
+      </div>
       <Main></Main>
 
     {/* <div>

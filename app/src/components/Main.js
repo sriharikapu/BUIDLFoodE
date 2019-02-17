@@ -20,6 +20,7 @@ import Web3 from 'web3';
 // ------------------------------------
 const portis = new Portis("8979ee0a-562d-413e-b83f-915f682cfa1b", "rinkeby", { scope: ["email"]  });  
 const web3 = new Web3(portis.provider);
+
 const CT_USER_ADDRESS = "USER_ADDRESS";
 const CT_FARMER_ADDRESS = "FARMER_ADDRESS";
 const CT_PORTIS_IMG_TITLE = "Debit card or ETH";
@@ -54,9 +55,10 @@ function ShowBalance() {
     return;
   }
   web3.eth.getBalance(add, 'latest').then((result) => {
+  var resultInWei = parseFloat(web3.utils.fromWei(result, 'ether'));
   ab.innerHTML =
     "Account balance: " +
-    web3.utils.fromWei(result, 'ether') + " ETH";});
+    resultInWei.toFixed(4) + " ETH";});
 
     ab.style.color = "black";
 
@@ -75,9 +77,7 @@ function ShowTransaction(receipt) {
       console.error(error);
     }
     else {
-      if(output.blockHash === null) {
-        ts.innerHTML = ts.innerHTML + "The transaction is pending.";
-      }
+
       console.log(output);
     }
   });
@@ -116,7 +116,7 @@ function SendPayment() {
   web3.eth.sendTransaction({
     from: localStorage.getItem(CT_USER_ADDRESS),
     to: localStorage.getItem(CT_FARMER_ADDRESS),
-    value: 10000
+    value: 60000000000000000
 }, handleReceipt);
 }
 
